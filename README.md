@@ -1,159 +1,122 @@
-Reddit Artist Sentiment Analysis
+# 🎨 Reddit Artist Sentiment Analysis
 
-A Deep Learning system designed to classify Reddit posts about artists into three sentiment categories: Negative, Positive, and Neutral. This project compares the performance of 2 different Neural Network architectures using Keras and TensorFlow.
+A **Deep Learning system** designed to classify Reddit posts about artists into three sentiment categories: Negative, Positive, and Neutral. The project compares the performance of two distinct neural network architectures for sentiment classification.
 
-By applying Natural Language Processing (NLP) techniques, specifically Sequence Modeling and Transfer Learning, the system aims to automate the analysis of public opinion and social sentiment regarding artists.
+---
 
-📋 Table of Contents
+## 🌟 Features
 
-About The Project
+- **Sentiment Classification:** Three classes — Negative, Positive, Neutral.
+- **Model Benchmarking:** Compares a custom Bi-LSTM to a Universal Sentence Encoder (USE) transfer learning approach.
+- **Robust Pipeline:** Modular scripts for data loading, visualization, training, and evaluation.
+- **Optimized Performance:** Utilizes efficient batching and TensorFlow's `AUTOTUNE` for faster training.
 
-Project Structure
+---
 
-Built With
+## 🗂️ Project Structure
 
-Getting Started
-
-Prerequisites
-
-Installation
-
-Usage
-
-1. Data Preparation
-
-2. Training
-
-3. Evaluation
-
-Models Compared
-
-Contributing
-
-License
-
-Contact
-
-📖 About The Project
-
-Analyzing social media sentiment is a task that provides crucial insights into public perception. This project leverages Deep Learning to automate this classification.
-
-Key Features:
-
-Sentiment Classification: Categorizes text into 3 distinct classes (Negative, Positive, Neutral).
-
-Model Comparison: Systematically evaluates a custom Bi-LSTM against a Transfer Learning approach (Universal Sentence Encoder).
-
-Robust Pipeline: Includes dedicated scripts for data loading, visualization, training, and helper functions.
-
-Optimized Performance: Utilizes tf.data.AUTOTUNE and efficient batching for faster training.
-
-📂 Project Structure
-
-The repository is organized into the following directories:
-
+```
 REDDITSENTIMENT/
-├── dataset/                           # Scripts for data loading and exploratory data analysis
-│   ├── data.py
-│   └── explore_data.py
-├── Functions/                         # Utility functions for plotting and metrics
-│   └── helperFunctions.py
-├── model/                             # Custom layer definitions and USE wrapper
-│   ├── extra_layers.py
-│   └── USE_model.py
-├── models/                            # Training scripts and saved model artifacts
-│   ├── saved_models/
-│   ├── model1.py                      # Bi-LSTM Training Script
-│   └── model2.py                      # USE Transfer Learning Training Script
-├── reddit_artist_posts_sentiment.csv  # The raw dataset
-└── README.md                          # Project documentation
+├── dataset/
+│   ├── data.py                 # Data loading and preprocessing
+│   └── explore_data.py         # Exploratory data analysis
+├── Functions/
+│   └── helperFunctions.py      # Plotting and metrics utilities
+├── model/
+│   ├── extra_layers.py         # Custom layer definitions
+│   └── USE_model.py            # Universal Sentence Encoder (USE) wrapper
+├── models/
+│   ├── saved_models/           # Saved models
+│   ├── model1.py               # Bi-LSTM training script
+│   └── model2.py               # USE training script
+├── reddit_artist_posts_sentiment.csv  # Raw dataset
+└── README.md                   # Project documentation
+```
 
+---
 
-🛠 Built With
+## 🛠️ Built With
 
-Python 3.x
+- **Python 3.x**
+- **TensorFlow & Keras**
+- **TensorFlow Hub**
+- **NumPy**
+- **Pandas**
+- **Matplotlib**
+- **scikit-learn**
 
-TensorFlow & Keras
+---
 
-TensorFlow Hub
+## 🚀 Getting Started
 
-NumPy
+### Prerequisites
 
-Pandas
+- Python 3.6+
+- `pip` package manager
 
-Matplotlib
+### Installation
 
-🚀 Getting Started
-
-To get a local copy up and running, follow these steps.
-
-Prerequisites
-
-Python 3.6+
-
-pip package manager
-
-Installation
-
-Clone the repository
-
-git clone [https://github.com/your-username/reddit-sentiment-analysis.git](https://github.com/your-username/reddit-sentiment-analysis.git)
+```bash
+git clone https://github.com/your-username/reddit-sentiment-analysis.git
 cd REDDITSENTIMENT
 
-
-Install required packages
-
 pip install pandas numpy tensorflow keras tensorflow-hub matplotlib scikit-learn
+```
 
+---
 
-💻 Usage
+## 💻 Usage
 
-1. Data Preparation
+### 1️⃣ Data Preparation
 
-The dataset reddit_artist_posts_sentiment.csv is included in the root directory. The dataset/data.py script handles loading, and dataset/explore_data.py can be used to visualize label distribution.
+- Dataset: `reddit_artist_posts_sentiment.csv`
+- Loading: `dataset/data.py`
+- Visualization: `dataset/explore_data.py`
 
-2. Training
+### 2️⃣ Training
 
-Navigate to the models directory. This folder contains scripts for the 2 different models. Run the script corresponding to the model you wish to train.
+- Change to the `models` directory:
+  - **Train Bi-LSTM Model:**\
+    `python models/model1.py`
+  - **Train Universal Sentence Encoder Model:**\
+    `python models/model2.py`
 
-Train Model 1 (Bi-LSTM):
+> Scripts automatically handle UTF-8 encoding and TensorFlow logging.
 
-python models/model1.py
+### 3️⃣ Evaluation
 
+- Output includes:
+  - Accuracy Score
+  - Loss Value
+  - Loss Curve Plot (via `Functions/helperFunctions.py`)
 
-Train Model 2 (Universal Sentence Encoder):
+---
 
-python models/model2.py
+## 🧠 Models Compared
 
+| Model                   | Key Features                                                              |
+|-------------------------|---------------------------------------------------------------------------|
+| **Bidirectional LSTM**  | Embedding layer, Bi-LSTM, Global Max Pooling, TextVectorization           |
+| **USE (Transfer Learning)** | Universal Sentence Encoder from TF Hub, custom Keras layer, Dense layers |
 
-Note: The scripts automatically handle environment variables for UTF-8 encoding and TensorFlow logging.
+---
 
-3. Evaluation
+## 🤝 Contributing
 
-Both training scripts include evaluation steps that run automatically after training. They output:
+Contributions, suggestions, or issues are welcome! Please submit a pull request or open an issue for feedback.
 
-Accuracy Score
+---
 
-Loss Value
+## 📄 License
 
-Loss Curves Plot (using Functions/helperFunctions.py)
+Distributed under the MIT License.
 
-🧠 Models Compared
+---
 
-This project evaluates two distinct architectures to benchmark performance on sentiment classification.
+## 📬 Contact
 
-Model 1: Bidirectional LSTM
+For questions and collaboration:
+- [Your Name](mailto:your@email.com)
+- [GitHub Issues](https://github.com/your-username/reddit-sentiment-analysis/issues)
 
-Uses TextVectorization and an Embedding layer.
-
-Features a Bidirectional LSTM layer to capture sequence context.
-
-Utilizes Global Max Pooling for feature extraction.
-
-Model 2: Universal Sentence Encoder (USE)
-
-Uses Transfer Learning with the Universal Sentence Encoder from TensorFlow Hub.
-
-Implements a custom Keras Layer wrapper.
-
-Features fully connected Dense layers with ReLU activation.
+---
