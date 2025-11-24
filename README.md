@@ -1,124 +1,125 @@
-# redditSentimentClassification
-A Deep Learning NLP project using TensorFlow and Keras to classify Reddit sentiment. It compares a custom Bidirectional LSTM network against Transfer Learning with the Universal Sentence Encoder (USE) to predict Positive, Negative, or Neutral labels, featuring optimized data pipelines.
-
-
 🎨 Reddit Artist Sentiment Analysis
 
-A Deep Learning project that classifies the sentiment of Reddit posts about artists into three categories: Negative, Positive, or Neutral.
+📖 Overview
 
-This repository explores Natural Language Processing (NLP) techniques using TensorFlow and Keras, comparing a custom Bidirectional LSTM model against a Transfer Learning approach using the Universal Sentence Encoder (USE).
+This project is a Deep Learning application designed to perform sentiment analysis on Reddit posts related to artists. It classifies text data into three distinct categories: Negative, Positive, and Neutral.
 
-📂 Directory Structure
+The repository demonstrates a comparative study between two different Natural Language Processing (NLP) approaches using TensorFlow and Keras:
 
-Based on the project architecture:
+Custom Sequence Modeling: A Bidirectional LSTM network trained from scratch.
+
+Transfer Learning: A model utilizing the Universal Sentence Encoder (USE) from TensorFlow Hub.
+
+📂 Project Structure
+
+The project is organized into a modular directory structure for better maintainability:
+
 
 REDDITSENTIMENT/
 ├── dataset/
-│   ├── data.py              # Data loading scripts
-│   └── explore_data.py      # EDA and visualization
+│   ├── data.py              # Scripts for loading and processing the CSV data
+│   └── explore_data.py      # Exploratory Data Analysis (EDA) and visualization
 ├── Functions/
-│   └── helperFunctions.py   # Utilities (e.g., plotting loss curves)
+│   └── helperFunctions.py   # Utility functions (e.g., plotting loss/accuracy curves)
 ├── model/
-│   ├── extra_layers.py      # Custom Keras layers
-│   └── USE_model.py         # Wrapper for Universal Sentence Encoder
+│   ├── extra_layers.py      # Definitions for custom Keras layers
+│   └── USE_model.py         # Wrapper class for the Universal Sentence Encoder
 ├── models/
-│   ├── saved_models/        # Binary files for Model 1 and Model 2
-│   ├── model1.py            # Training script for Bi-LSTM
-│   └── model2.py            # Training script for USE Model
-└── reddit_artist_posts_sentiment.csv  # The dataset
+│   ├── saved_models/        # Directory where trained models (.keras) and weights are saved
+│   ├── model1.py            # Training and evaluation script for the Bi-LSTM model
+│   └── model2.py            # Training and evaluation script for the USE Transfer Learning model
+└── reddit_artist_posts_sentiment.csv  # The source dataset
 
 
-📊 The Data
+📊 The Dataset
 
-The dataset (reddit_artist_posts_sentiment.csv) consists of text posts scraped from Reddit.
+The model is trained on the reddit_artist_posts_sentiment.csv file.
 
-Input (X): Text content of the post.
+Input (X): Raw text from Reddit posts.
 
-Label (y): Sentiment category.
+Target (y): Sentiment labels converted to numeric values.
 
-Label Mapping:
-| Class Name | Numeric Label |
+Label Encoding:
+| Sentiment | Class ID |
 | :--- | :--- |
 | Negative | 0 |
 | Positive | 1 |
-| Neutral | 2 |
+| Neutral  | 2 |
 
 🧠 Model Architectures
 
-This project implements and compares two distinct Deep Learning models:
+Model 1: Bidirectional LSTM
 
-Model 1: Custom Bidirectional LSTM
+This model processes text as a sequence of tokens.
 
-A sequence model built from scratch.
+Text Vectorization: Adapts to the training set vocabulary (max tokens: 1000).
 
-Text Vectorization: Adapts to the training data vocabulary (capped at 1000 tokens).
+Embedding: Maps tokens to a 256-dimensional vector space.
 
-Embedding Layer: Converts tokens into dense vectors of fixed size (256).
+Bi-LSTM Layer: A Bidirectional Long Short-Term Memory layer (64 units) to capture context from both directions.
 
-Bidirectional LSTM: Captures context from both past and future words in the sequence.
+Pooling: Global Max Pooling 1D to extract the most salient features.
 
-Global Max Pooling: Extracts the most significant features from the sequence.
+Output: Dense layer with Softmax activation for multiclass classification.
 
-Dense Output: Softmax activation for multiclass classification.
+Model 2: Universal Sentence Encoder (USE)
 
-Model 2: Transfer Learning (USE)
+This model utilizes Transfer Learning for robust sentence embeddings.
 
-Leverages a pre-trained model from TensorFlow Hub.
+Base: Pre-trained Universal Sentence Encoder (from TensorFlow Hub).
 
-Universal Sentence Encoder (USE): Encodes text into high-dimensional vectors, capturing deep semantic meaning trained on massive web corpuses.
+Hidden Layers: Two Dense layers with 128 units each and ReLU activation.
 
-Custom Dense Layers: Two fully connected layers (128 units, ReLU activation) to adapt the embeddings to this specific dataset.
+Output: Dense layer with Softmax activation.
 
-Dense Output: Softmax activation.
+⚙️ Technical Features
 
-🛠️ Technologies & Libraries
+Data Pipeline: Uses tf.data.Dataset with batch() and prefetch(tf.data.AUTOTUNE) for optimized memory usage and training speed.
 
-Core: Python 3, TensorFlow 2.x, Keras
+Callbacks:
 
-Data Manipulation: Pandas, NumPy
+EarlyStopping: Monitors validation accuracy to prevent overfitting.
 
-Visualization: Matplotlib
+ReduceLROnPlateau: Dynamically adjusts the learning rate if convergence stalls.
 
-Preprocessing: Scikit-Learn (Train/Test Split)
+Environment Handling: Automatically sets TF_CPP_MIN_LOG_LEVEL and PYTHONUTF8 to ensure smooth execution.
 
-Transfer Learning: TensorFlow Hub
+🚀 Getting Started
 
-🚀 Installation & Usage
+Prerequisites
 
-Clone the repository:
+Ensure you have Python 3.x installed. Install the required dependencies:
+pip install pandas numpy tensorflow keras tensorflow-hub matplotlib scikit-learn
+
+Usage
+
+Clone the Repository:
 
 git clone [https://github.com/your-username/reddit-sentiment-analysis.git](https://github.com/your-username/reddit-sentiment-analysis.git)
 cd REDDITSENTIMENT
 
 
-Install dependencies:
+Train Model 1 (Bi-LSTM):
 
-pip install pandas numpy tensorflow tensorflow-hub matplotlib scikit-learn
-
-
-Environment Setup:
-The scripts automatically configure the following environment variables to handle encoding and logs:
-
-TF_CPP_MIN_LOG_LEVEL = '2'
-
-PYTHONUTF8 = '1'
-
-Training:
-You can run the model scripts to train and evaluate:
-
-# Run the LSTM model
 python models/model1.py
 
-# Run the USE model
+
+This will preprocess the data, train the LSTM network, save the model to models/saved_models/model1/, and display the loss curves.
+
+Train Model 2 (USE):
+
 python models/model2.py
 
 
-📈 Training Features
+This will download the USE model, train the dense layers, save the model to models/saved_models/model2/, and display the evaluation metrics.
 
-Performance Optimization: Uses tf.data.Dataset with .batch(128) and .prefetch(tf.data.AUTOTUNE) for efficient data loading.
+📈 Results
 
-Callbacks:
+Both models output the following metrics upon completion:
 
-EarlyStopping: Stops training if validation accuracy stagnates.
+Loss: Sparse Categorical Crossentropy.
 
-ReduceLROnPlateau: Lowers learning rate when the metric stops improving to find the global minimum.
+Accuracy: Percentage of correctly classified posts.
+
+Loss curves are automatically plotted using matplotlib at the end of the training script.
+
