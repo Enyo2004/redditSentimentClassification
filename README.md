@@ -100,23 +100,3 @@ pip install pandas numpy tensorflow keras tensorflow-hub matplotlib scikit-learn
 | **USE (Transfer Learning)** | Universal Sentence Encoder from TF Hub, custom Keras layer, Dense layers |
 
 ---
-
-## 🤝 Contributing
-
-Contributions, suggestions, or issues are welcome! Please submit a pull request or open an issue for feedback.
-
----
-
-## 📄 License
-
-Distributed under the MIT License.
-
----
-
-## 📬 Contact
-
-For questions and collaboration:
-- [Your Name](mailto:your@email.com)
-- [GitHub Issues](https://github.com/your-username/reddit-sentiment-analysis/issues)
-
----
